@@ -2,81 +2,143 @@
 
 #define MAX 50
 
+// imprime o vetor
 void imprimir(int v[], int n) {
-    if (!n) { printf("Vetor vazio.\n"); return; }
-    for (int i = 0; i < n; i++) printf("%d ", v[i]);
+    if (n == 0) {
+        printf("vetor vazio\n");
+        return;
+    }
+    for (int i = 0; i < n; i++) {
+        printf("%d ", v[i]);
+    }
     printf("\n");
 }
 
+// busca binaria
 int buscaBinaria(int v[], int n, int x) {
-    int ini = 0, fim = n - 1;
+    int ini = 0, fim = n - 1, meio;
+
     while (ini <= fim) {
-        int m = (ini + fim) / 2;
-        if (v[m] == x) return m;
-        (x < v[m]) ? (fim = m - 1) : (ini = m + 1);
+        meio = (ini + fim) / 2;
+
+        if (v[meio] == x)
+            return meio;
+        else if (v[meio] < x)
+            ini = meio + 1;
+        else
+            fim = meio - 1;
     }
     return -1;
 }
 
-int inserirOrdenado(int v[], int *n, int x) {
-    if (*n >= MAX) return 0;
+// insercao ordenada
+void inserirOrdenado(int v[], int *n, int x) {
+    if (*n >= MAX) {
+        printf("vetor cheio\n");
+        return;
+    }
+
     int i = *n - 1;
-    while (i >= 0 && v[i] > x) v[i + 1] = v[i--];
+
+    while (i >= 0 && v[i] > x) {
+        v[i + 1] = v[i];
+        i--;
+    }
+
     v[i + 1] = x;
     (*n)++;
-    return 1;
 }
 
+// remover elemento
 void remover(int v[], int *n, int x) {
     int pos = buscaBinaria(v, *n, x);
-    if (pos == -1) return;
-    for (int i = pos; i < *n - 1; i++) v[i] = v[i + 1];
+
+    if (pos == -1) {
+        printf("elemento nao encontrado\n");
+        return;
+    }
+
+    for (int i = pos; i < *n - 1; i++) {
+        v[i] = v[i + 1];
+    }
+
     (*n)--;
+    printf("elemento removido\n");
 }
 
 int main() {
-    int v[MAX], n = 0, capacidade, qtd, op, x;
+    int v[MAX];
+    int n, qtd, valor, opcao;
 
+    // tamanho do vetor
     do {
-        printf("Digite um Vetor Tamanho (3-50): ");
-        scanf("%d", &capacidade);
-    } while (capacidade < 3 || capacidade > 50);
+        printf("digite o tamanho do vetor (3 a 50): ");
+        scanf("%d", &n);
+    } while (n < 3 || n > 50);
 
-    do {
-        printf("Qtd inicial: ");
-        scanf("%d", &qtd);
-    } while (qtd < 0 || qtd > capacidade);
+    int capacidade = n;
+    n = 0;
 
+    // quantidade inicial de elementos
+    printf("quantos valores deseja inserir inicialmente: ");
+    scanf("%d", &qtd);
+
+    if (qtd > capacidade) qtd = capacidade;
+
+    // insercao inicial ordenada
     for (int i = 0; i < qtd; i++) {
-        scanf("%d", &x);
-        inserirOrdenado(v, &n, x);
+        printf("digite um valor: ");
+        scanf("%d", &valor);
+        inserirOrdenado(v, &n, valor);
     }
 
     do {
-        printf("\n1-Imprimir 2-Buscar 3-Remover 4-Inserir 0-Sair\n");
-        scanf("%d", &op);
+        printf("\nmenu:\n");
+        printf("1 - imprimir vetor\n");
+        printf("2 - buscar elemento\n");
+        printf("3 - remover elemento\n");
+        printf("4 - inserir elemento\n");
+        printf("0 - sair\n");
+        printf("opcao: ");
+        scanf("%d", &opcao);
 
-        if (op == 1) imprimir(v, n);
+        switch (opcao) {
+            case 1:
+                imprimir(v, n);
+                break;
 
-        else if (op == 2) {
-            scanf("%d", &x);
-            int p = buscaBinaria(v, n, x);
-            printf("%d\n", p);
+            case 2:
+                printf("digite o valor: ");
+                scanf("%d", &valor);
+                int pos = buscaBinaria(v, n, valor);
+                printf("posicao: %d\n", pos);
+                break;
+
+            case 3:
+                printf("digite o valor a remover: ");
+                scanf("%d", &valor);
+                remover(v, &n, valor);
+                break;
+
+            case 4:
+                if (n >= capacidade) {
+                    printf("sem espaco no vetor\n");
+                } else {
+                    printf("digite o valor: ");
+                    scanf("%d", &valor);
+                    inserirOrdenado(v, &n, valor);
+                }
+                break;
+
+            case 0:
+                printf("encerrando...\n");
+                break;
+
+            default:
+                printf("opcao invalida\n");
         }
 
-        else if (op == 3) {
-            scanf("%d", &x);
-            remover(v, &n, x);
-        }
-
-        else if (op == 4) {
-            if (n < capacidade) {
-                scanf("%d", &x);
-                inserirOrdenado(v, &n, x);
-            }
-        }
-
-    } while (op != 0);
+    } while (opcao != 0);
 
     return 0;
 }
