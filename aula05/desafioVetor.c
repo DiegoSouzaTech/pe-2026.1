@@ -38,7 +38,7 @@ int main() {
     int v[MAX], n = 0, capacidade, qtd, op, x;
 
     do {
-        printf("Tamanho (3-50): ");
+        printf("Digite um Vetor Tamanho (3-50): ");
         scanf("%d", &capacidade);
     } while (capacidade < 3 || capacidade > 50);
 
