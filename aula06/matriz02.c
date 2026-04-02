@@ -100,8 +100,8 @@ void zerarAbaixoDigPrincipalOtimizada(int m[][COL], int lin, int col) {
         return;
     }
      for (int i = 1; i < lin; i += 1) {
-        for (int j = 1; j < i; j += 1) {
-            m[i][j] = 1;
+        for (int j = 0; j < i; j += 1) {
+            m[i][j] = 0;
         }
     }
 }
