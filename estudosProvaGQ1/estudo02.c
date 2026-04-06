@@ -1,18 +1,31 @@
+#include <stdlib.h>
 #include <stdio.h>
 
-#define TAMANHO 5
+void preencherVetor(int v[], int n){ //  vetor recebido como parâmetro solicitando 
+// que o usuário digite n valores inteiros
+    int numero = 0;
+    for(int i = 0; i < n; i++){
+        printf("Digite %d numero: ", i + 1);
+        scanf("%d", &numero);
+        v[i] = numero;
+    }
+}
+
+void imprimirVetor(int v[], int n){ //  os n valores armazenados 
+// neste vetor separados por vírgula e dentro de chaves.
+    printf("{ ");
+    for(int i = 0; i < n; i++){
+        printf("%d", v[i]);
+        if(i < n - 1) printf(", ");
+    }
+    printf(" }\n");
+}
 
 int main(){
-    int v[5], soma = 0;
+    int v[5];
 
-    printf("Digite 5 numeros interios:\n");
+    preencherVetor(v, 5);
+    imprimirVetor(v, 5);
 
-    for(int i = 0; i < 5; i++){
-        printf("Numero %d: " , i + 1);
-        scanf("%d" , &v[i]);
-        soma += v[i];
-    }
-
-    printf("Soma = %d\n", soma);
     return 0;
 }
