@@ -1,25 +1,22 @@
-#include <stdio.h>
+#include <stdio.h> // Leia 6 números e mostre na tela
 
-#define TAMANHO 5 
+#define TAMANHO 6
 
 int main() {
-    int v[5];
+    int v[6];
     int i;
 
-    printf("Digite 5 numeros inteiros:\n", v[5]);
+    printf("Digite 6 valores inteiros:\n", v[6]);
 
-    for(int i = 0; i < 5; i++){
+    for(int i = 0; i < 6; i++) {
         scanf("%d", &v[i]);
     }
 
-    printf("Seus numeros digitados foram...\n");
-    
-    for(int i = 0; i < 5; i++){
+    for(int i = 0; i < 6; i++) {
         printf("%d ", v[i]);
     }
-
-    printf("\n");
-
-    return
+    
+    return 0;
+   
 }
 
