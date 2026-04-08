@@ -13,6 +13,8 @@ void lerVetor(int v[], int n){
         v[i] = numero;
     }
 }
+ // exibir entre cochetes separados por espaço
+//(pode ser entre chaves e por virgula)
 
 void exibirVetor(int v[], int n){
     printf(" [ ");
