@@ -7,16 +7,16 @@ void ordenar(int v[], int n){
     int aux = 0, pos = 0, fim = n - 2, troca = 1;
     while(troca == 1){
         troca = 0;
-    for(int i = 0; i <= fim; i += 1){
-        if(v[i] > v[i + 1]){
-            aux = v[i];
-            v[i] = v[i + 1];
-            v[i + 1] = aux;
-            pos = i;
-            troca = 1;
+        for(int i = 0; i <= fim; i++){
+            if(v[i] > v[i + 1]){
+                aux = v[i];
+                v[i] = v[i + 1];
+                v[i + 1] = aux;
+                pos = i;
+                troca = 1;
+            }
         }
-    }
-    fim = pos - 1;
+        fim = pos - 1;
     }
 }
 

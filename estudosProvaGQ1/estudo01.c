@@ -1,22 +1,110 @@
-#include <stdio.h> // Leia 6 números e mostre na tela
+#include <stdio.h>
+#include <stdlib> 
 
-#define TAMANHO 6
 
-int main() {
-    int v[6];
-    int i;
+// treino de tecla
 
-    printf("Digite 6 valores inteiros:\n", v[6]);
 
-    for(int i = 0; i < 6; i++) {
-        scanf("%d", &v[i]);
+void lerVetor(int v[], int n){
+    int numero = 0;
+    for(int i = 0; i < n; i++){
+        printf("Digite %d numero: ", i + 1);
+        scanf("%d", &numero); 
+        v[i] = numero;
     }
-
-    for(int i = 0; i < 6; i++) {
-        printf("%d ", v[i]);
-    }
-    
-    return 0;
-   
 }
 
+void exibirVetor(int v[], int n){
+    printf(" [ ");
+    for(int i = 0; i < n; i++){
+        printf("%d", v[i]);
+        if(i < n - 1) printf("  ");
+    }
+    printf(" ]\n");
+}
+
+// bubble sort
+
+void ordenarDecrescente(int v[], int n){
+    int aux = 0, pos = 0, fim = n - 2, troca = 1;
+    while(troca == 1){
+        troca = 0;
+        for(int i = 0; i <= fim; i++){
+        if(v[i] > v[i + 1]){
+            aux = v[i];
+            v[i] = v[i + 1];
+            v[i + 1] = aux;
+            pos = i;
+            troca = 1;
+        }
+        }
+        fim = pos - 1;
+    }
+}
+
+// menor valor par no vetor
+
+void imprimirMenorPar(int v[], int n){
+    int menorpar = INT_MAX;
+    for(int i = 0; i < n; i++){
+        if(v[i] % 2 == 0 v[i] < menorpar){
+            menorpar = v[i];
+        }
+    }
+    if(menorpar == INT_MAX){
+        printf("nao ha numeros pares no vetor");
+    } else {
+        printf("%d", menorpar);
+    }
+
+}
+
+// maior valor impar no vetor
+
+void imprimirMaiorImpar(int v[], int n){
+    int maiorimpar = 0;
+    for(int i = 0; i < n; i++){
+        if(v[i] % 2 == 1 v[i] > maiorimpar){
+            maiorimpar = v[i];
+        }
+    }    
+    if(maiorimpar == 0){
+        printf("nao ha numeros impares no vetor")
+    } else {
+        printf("%d", maiorimpar);
+    }
+}
+
+// divide numeros pares e impares 
+
+void criarParesImpares(int v[], int n, int pares[], int impares[]){
+    int contadorimpares = 0, contadorpares = 0;
+    for(int i = 0; i < n; i++){
+        if(v[i] % 2 == 0){
+            pares[contadorpares] = v[i];
+            contadorpares += 1;
+        } else {
+            impares[contadorimpares] = v[i];
+            contadorimpares += 1;
+        }     // --------------- isso aqui sem precisar de -1 complete        
+    }                       
+    for(int i = contadorpares; i < n; i++){
+        pares[i] = -1;
+    }
+    for(int i = contadorimpares; i < n; i++){
+        impares[i] = -1;
+    }
+}
+
+// Matriz
+
+void preencherMatriz(int m[][QTD_COLUNAS], int qtdLinhas, int qtdColunas){
+    int num = 0;
+    for(int i = 0; i < qtdLinhas; i++){
+        for(int j = 0; j < qtdColunas; j++){  // qnd for fazer matriz define(i e j)
+            printf("Digite o numero da celula[%d][%d]", i, j);
+            scanf("%d", &num);
+            m[i][j] = num;
+        }
+    }
+}
