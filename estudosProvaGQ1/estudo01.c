@@ -134,3 +134,14 @@ int buscaBinaria(int v[], int n, int chave){
         return -1;
     }
 }
+
+// busca sequencial
+
+int buscaSequencial(int v[], int n, int x) {
+    for (int i = 0; i < n; i += 1) {
+        if (v[i] == x) {
+            return i;
+        }
+    }
+    return -1;
+}
