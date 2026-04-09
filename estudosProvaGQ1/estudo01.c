@@ -8,8 +8,8 @@
 void lerVetor(int v[], int n){
     int numero = 0;
     for(int i = 0; i < n; i++){
-        printf("Digite %d numero: ", i + 1);
-        scanf("%d", &numero); 
+        printf("Digite %d numeros inteiros: ", i + 1);
+        scanf("%d", &numero);
         v[i] = numero;
     }
 }
@@ -17,12 +17,12 @@ void lerVetor(int v[], int n){
 //(pode ser entre chaves e por virgula)
 
 void exibirVetor(int v[], int n){
-    printf(" [ ");
+    printf(" { ");
     for(int i = 0; i < n; i++){
         printf("%d", v[i]);
         if(i < n - 1) printf("  ");
     }
-    printf(" ]\n");
+    printf(" }\n");
 }
 
 // bubble sort
@@ -32,13 +32,13 @@ void ordenarDecrescente(int v[], int n){
     while(troca == 1){
         troca = 0;
         for(int i = 0; i <= fim; i++){
-        if(v[i] > v[i + 1]){
-            aux = v[i];
-            v[i] = v[i + 1];
-            v[i + 1] = aux;
-            pos = i;
-            troca = 1;
-        }
+            if(v[i] > v[i + 1]){
+                aux = v[i];
+                v[i] = v[i + 1];
+                v[i + 1] = aux;
+                pos = i;
+                troca = 1;
+            }
         }
         fim = pos - 1;
     }
@@ -49,16 +49,15 @@ void ordenarDecrescente(int v[], int n){
 void imprimirMenorPar(int v[], int n){
     int menorpar = INT_MAX;
     for(int i = 0; i < n; i++){
-        if(v[i] % 2 == 0 v[i] < menorpar){
+        if(v[i] % 2 == 0 && v[i] < menorpar){
             menorpar = v[i];
         }
     }
     if(menorpar == INT_MAX){
-        printf("nao ha numeros pares no vetor");
+       printf("nao ha numeros pares no vetor"); 
     } else {
         printf("%d", menorpar);
-    }
-
+    }  
 }
 
 // maior valor impar no vetor
@@ -66,12 +65,12 @@ void imprimirMenorPar(int v[], int n){
 void imprimirMaiorImpar(int v[], int n){
     int maiorimpar = 0;
     for(int i = 0; i < n; i++){
-        if(v[i] % 2 == 1 v[i] > maiorimpar){
+        if(v[i] % 2 == 1 && v[i] > maiorimpar){
             maiorimpar = v[i];
         }
-    }    
+    }
     if(maiorimpar == 0){
-        printf("nao ha numeros impares no vetor")
+        printf("nao ha numeros impares no vetor");
     } else {
         printf("%d", maiorimpar);
     }
@@ -103,10 +102,35 @@ void criarParesImpares(int v[], int n, int pares[], int impares[]){
 void preencherMatriz(int m[][QTD_COLUNAS], int qtdLinhas, int qtdColunas){
     int num = 0;
     for(int i = 0; i < qtdLinhas; i++){
-        for(int j = 0; j < qtdColunas; j++){  // qnd for fazer matriz define(i e j)
-            printf("Digite o numero da celula[%d][%d]", i, j);
+        for(int j = 0; j < qtdColunas; i++){
+            printf("Digite o numero de celulas[%d][%d]", i, j);
             scanf("%d", &num);
             m[i][j] = num;
         }
+    }
+}
+
+// busca binaria
+
+int buscaBinaria(int v[], int n, int chave){
+    int inicio = 0, meio, fim = n - 1;
+
+    if(n == 0){
+        return -2;
+    }
+
+    do{
+        meio = (inicio + fim) / 2;
+        if(v[meio] > chave){
+            fim = meio - 1;
+        } else if (v[meio] < chave){
+            inicio = meio + 1;
+        }
+    }while(v[meio] != chave && inicio <= fim);
+
+    if(v[meio] == chave){
+        return meio;
+    }else{
+        return -1;
     }
 }
