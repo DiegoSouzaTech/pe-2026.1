@@ -34,11 +34,11 @@ int main() {
 }
 
 double calcularMedia(int v[], int n) {
-    int soma;
-    for (int i = 0; i < n; i += 1) {
-        soma += v[i];
-    }
-    return (double) soma / (double) n;
+    int soma = 0;
+for (int i = 0; i < n; i += 1) {
+    soma += v[i];
+}
+return (double) soma / (double) n;
 }
 
 void imprimirMaiorIgualMedia(int v[], int n, double media) {
